@@ -1,0 +1,15 @@
+.topMargin{
+    margin-top: 3vh;
+}
+
+.addCity{
+    margin-top: 8vh;
+}
+
+.someMargin{
+    margin-right: 3vw;
+}
+
+agm-map {
+    height: 300px;
+}

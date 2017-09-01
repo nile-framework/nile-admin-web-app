@@ -1,0 +1,9 @@
+<form [formGroup]="newVendorForm" (submit)="onSubmit()" novalidate>
+  <div class="input-group topMargin">
+    <span class="input-group-addon" id="basic-addon3">Item name</span>
+    <input type="text" formControlName="name" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+  </div>
+  <div class="text-center topMargin">
+    <button type="submit" [disabled]="newVendorForm.invalid" md-raised-button>Add Vendor</button>
+  </div>
+</form>

@@ -1,0 +1,50 @@
+<div class="container-fluid" class="top-padding">
+  <div class="text-center">
+    <h1>Nile Admin</h1>
+  </div>
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="col">
+      <md-tab-group>
+
+        <md-tab label="Login">
+          <form [formGroup]="loginForm" (submit)="onLogin()" novalidate>
+            <md-input-container class="full-width">
+              <input type="email" formControlName="email" mdInput placeholder="email" value="previousEmail">
+            </md-input-container>
+            <md-input-container class="full-width">
+              <input type="password" formControlName="password" mdInput placeholder="password">
+            </md-input-container>
+            <div text-center>
+              <button type="submit" [disabled]="loginForm.invalid" md-raised-button>Login</button>
+            </div>
+          </form>
+        </md-tab>
+
+        <md-tab label="Sign up">
+          <form [formGroup]="signupForm" (submit)="onSignup()" novalidate>
+            <md-input-container class="full-width">
+              <input type="email" formControlName="email" mdInput placeholder="email" value="previousEmail">
+            </md-input-container>
+            <md-input-container class="full-width">
+              <input type="password" formControlName="password" mdInput placeholder="password">
+            </md-input-container>
+            <div text-center>
+              <button type="submit" [disabled]="signupForm.invalid" md-raised-button>Sign up</button>
+            </div>
+          </form>
+        </md-tab>
+
+      </md-tab-group>
+    </div>
+    <div class="col">
+    </div>
+
+  </div>  
+</div>
+
+
+
+
+

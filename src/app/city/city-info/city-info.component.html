@@ -1,0 +1,36 @@
+<md-spinner class="topMargin" *ngIf="cityLoading"></md-spinner>
+
+<div *ngIf="!citySelected" class="topMargin text-center">
+    <h2>Select a city to view it.</h2>
+</div>
+
+<form *ngIf="citySelected" [formGroup]="cityInfoForm" novalidate class="topMargin">
+
+    <div *ngIf="!editing" class="text-center">
+        <h2>City Info</h2>
+        <button (click)="editItem()" type="button" class="btn btn-info">edit item</button>
+    </div>
+
+    <div *ngIf="editing" class="row topPadding"> 
+        <div class="col text-center">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" (click)="save()" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Save</button>
+                <button type="button" (click)="dismiss()" class="btn btn-warning"><i class="fa fa-ban" aria-hidden="true"></i>&nbsp; Cancel</button>
+                <button type="button" (click)="delete()" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>&nbsp; Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group topMargin ">
+        <span class="input-group-addon" id="basic-addon3">City name</span>
+        <input type="text" formControlName="name" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+    </div>
+    <div class="topMargin">
+        <md-radio-group formControlName="active" >
+          <md-radio-button value="true" >Active</md-radio-button>
+          <md-radio-button value="false">NOT active</md-radio-button>
+        </md-radio-group>
+    </div>
+
+
+</form>

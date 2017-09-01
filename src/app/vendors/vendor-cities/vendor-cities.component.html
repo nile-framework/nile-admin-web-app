@@ -1,0 +1,32 @@
+<md-tab-group *ngIf="shouldShow">
+  <md-tab *ngFor="let city of vendorCities" [label]="city.val()">
+    <button type="submit" class="btn btn-primary" (click)="addLocation()">Add location</button>
+    <md-card>
+      <!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+    <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="false" [zoom]="zoom">
+      <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+    </agm-map>
+      <form [formGroup]="addLocationForm" (submit)="onSubmit()" novalidate>
+        
+          
+        
+      </form>
+    </md-card>
+  </md-tab>
+  
+  
+  <md-tab label="Add city">
+    <div class="addCity text-center">
+      <form [formGroup]="addCityForm" novalidate (submit)="addCity()">
+          <md-select formControlName="cityToAdd"  placeholder="Select a city" class="someMargin">
+            <md-option *ngFor="let city of antiVendorCities" [value]="city">
+              {{ city.val().name }}
+            </md-option>
+          </md-select>
+          <button type="submit" class="btn btn-info">Add city</button>
+        </form>
+    </div>
+  </md-tab>
+
+</md-tab-group>

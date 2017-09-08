@@ -1,11 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {MdDialog, MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
+import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as Firebase from 'Firebase/app';
 
 import { NewIndustryComponent } from '../new-industry/new-industry.component';
+import { MdSnackBar } from '@angular/material';
 import { ErrorComponent } from '../error/error.component';
 
 @Component({
@@ -19,6 +20,7 @@ export class IndustriesComponent implements OnInit {
 
   constructor(
     public dialog: MdDialog,
+    public snackBar: MdSnackBar,
     private _fb: FormBuilder,
     private _afDb: AngularFireDatabase    
   ) {
@@ -42,6 +44,9 @@ export class IndustriesComponent implements OnInit {
       if (result) {
         this.writeToDataBase(result).then( snapshot => {
         // the database write was successful
+        let snackBarRef = this.snackBar.open( 'Industry added to database', 'Okay', { 
+          duration: 2000,
+         });
         }, error => {
           // open a new dialog showing the error
           let dialogRef = this.dialog.open(ErrorComponent, {
@@ -60,7 +65,7 @@ export class IndustriesComponent implements OnInit {
   }
 
 writeToDataBase(IndustryName:string): Firebase.Promise<any> {
-  return this._afDb.list(`Industries/$`).push({
+  return this._afDb.list(`industries`).push({
   name: IndustryName
 })
 }

@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MdDialog } from '@angular/material';
+import {MdDialog, MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as Firebase from 'Firebase/app';
 
 import { NewIndustryComponent } from '../new-industry/new-industry.component';
 import { ErrorComponent } from '../error/error.component';
-
 
 @Component({
   selector: 'app-industries',
@@ -21,7 +20,7 @@ export class IndustriesComponent implements OnInit {
   constructor(
     public dialog: MdDialog,
     private _fb: FormBuilder,
-    private _afDb: AngularFireDatabase
+    private _afDb: AngularFireDatabase    
   ) {
     this.buildForm();
   }
@@ -41,7 +40,16 @@ export class IndustriesComponent implements OnInit {
     dialogRef.afterClosed().subscribe( result => {
       console.log('result from the dialog is: ' + result);
       if (result) {
-        this.writeToDataBase(result);
+        this.writeToDataBase(result).then( snapshot => {
+        // the database write was successful
+        }, error => {
+          // open a new dialog showing the error
+          let dialogRef = this.dialog.open(ErrorComponent, {
+            height: '200px',
+            width: '300px',
+            data:  error
+          });
+        })        
         // there is a result to process, lets now write it to the database.
         // if the write to the database is successful, display a confirmation 'snackbar'
         // else, open a new dialog with the error.

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MdDialog } from '@angular/material';
 
 import { AngularFireDatabase } from 'angularfire2/database';
+import * as Firebase from 'Firebase/app';
 
 import { NewIndustryComponent } from '../new-industry/new-industry.component';
 import { ErrorComponent } from '../error/error.component';
@@ -40,6 +41,7 @@ export class IndustriesComponent implements OnInit {
     dialogRef.afterClosed().subscribe( result => {
       console.log('result from the dialog is: ' + result);
       if (result) {
+        this.writeToDataBase(result);
         // there is a result to process, lets now write it to the database.
         // if the write to the database is successful, display a confirmation 'snackbar'
         // else, open a new dialog with the error.
@@ -48,6 +50,12 @@ export class IndustriesComponent implements OnInit {
       }
     });
   }
+
+writeToDataBase(IndustryName:string): Firebase.Promise<any> {
+  return this._afDb.list(`Industries/$`).push({
+  name: IndustryName
+})
+}
 
   // DON'T worry about me just yet.
   // we build the form in a separate function, this helps keep the constructor clean.

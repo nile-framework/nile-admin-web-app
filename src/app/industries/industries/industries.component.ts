@@ -34,7 +34,7 @@ export class IndustriesComponent implements OnInit {
   addIndustryDialog(): void {
     let dialogRef = this.dialog.open(NewIndustryComponent, {
       height: '200px',
-      width: '200px'
+      width: '300px'
     });
     // we subscribe to dialogs close event.
     dialogRef.afterClosed().subscribe( result => {

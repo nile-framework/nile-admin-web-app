@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _auth: AuthService,
+    private _router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  logout() {
+    this._auth.logout().then( _ => {
+      this._router.navigate(['LandingPage']);
+    })
   }
 
 }

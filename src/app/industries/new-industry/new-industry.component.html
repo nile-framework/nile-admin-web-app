@@ -1,0 +1,13 @@
+<form [formGroup]="form" novalidate>
+    <h1 md-dialog-title>New Industry</h1>
+    <div md-dialog-content>
+        <md-form-field>
+            <input mdInput tabindex="1" formControlName="name">
+        </md-form-field>
+    </div>
+    <div md-dialog-actions>
+        <button md-button [md-dialog-close]="" tabindex="2">Cancel</button>
+        <button md-button [md-dialog-close]="form.value.name" [disabled]="form.invalid" tabindex="-1">Submit</button>
+    </div>
+
+</form>

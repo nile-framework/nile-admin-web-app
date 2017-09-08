@@ -43,7 +43,8 @@ export class LandingPageComponent {
   buildSignupForm() {
     this.signupForm = this._fb.group({
       email: [''],
-      password: ['']
+      password: [''],
+      accessCode: ['']
     })
   }
 
@@ -73,16 +74,23 @@ export class LandingPageComponent {
       // invalid form
       // TODO: maybe notify the user that their email or password was not valid.
     } else {
-      // attempt signup      
-      this._auth.signUp(this.signupForm.value.email, this.signupForm.value.password).then( user => {
-        this.showLoading = false;
-        this._router.navigate(['/account-info']);
-      }, error => {
-        console.log('something didnt work.');
-        this.showLoading = false;
-      })
-      this.showLoading = true;
-    }
+      // attempt signup
+      // but first check the access code.
+        if (this.signupForm.value.accessCode === 'angular is the best') {
+          this._auth.signUp(this.signupForm.value.email, this.signupForm.value.password).then( user => {
+            this.showLoading = false;
+            this._router.navigate(['/account-info']);
+          }, error => {
+            console.log('something didnt work.');
+            this.showLoading = false;
+          })
+          this.showLoading = true;
+        } else {
+          this.showLoading = false;
+          // invalid access code
+        }
+      }
+
   }
 
 

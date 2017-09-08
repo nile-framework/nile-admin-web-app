@@ -14,19 +14,16 @@ export class LoginStatusGuard implements CanActivate {
   constructor(
     private _afAuth: AngularFireAuth
   ) {
-    console.log('we ran.');
-    
-    
   }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       var authStatus = this.authListener.map( user => {
         if (user) {
-          console.log('user was true;');
+          // console.log('user was true;');
           return true;
         } else {
-          console.log('user was false');
+          // console.log('user was false');
           return false;
         }
       });

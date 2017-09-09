@@ -8,11 +8,12 @@
           Add Industry
       </button>
 
-      <form [formGroup]="form" class="example-form some-top-margin">
-        <md-form-field >
-          <input formControlName="searchInput" mdInput placeholder="Search industries">
-        </md-form-field>
-      </form>
+      <md-nav-list>
+        <md-list-item *ngFor="let item of industries | async" (click)="showListKey(item.$key)">
+           <a mdLine href="...">{{ item.name }}</a>
+        </md-list-item>
+      </md-nav-list>
+
     </div>
   </div>
 

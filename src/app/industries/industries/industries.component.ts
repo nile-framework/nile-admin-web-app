@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as Firebase from 'Firebase/app';
 
 import { NewIndustryComponent } from '../new-industry/new-industry.component';
@@ -17,6 +17,7 @@ import { ErrorComponent } from '../error/error.component';
 export class IndustriesComponent implements OnInit {
 
   form: FormGroup;
+  industries: FirebaseListObservable<any>;
 
   constructor(
     public dialog: MdDialog,
@@ -25,6 +26,7 @@ export class IndustriesComponent implements OnInit {
     private _afDb: AngularFireDatabase    
   ) {
     this.buildForm();
+    this.industries = this._afDb.list(`industries`);
   }
 
   // this is a lifecycle function, it runs when the component has been initialized.
@@ -70,6 +72,10 @@ writeToDataBase(IndustryName:string): Firebase.Promise<any> {
 })
 }
 
+showListKey(industryID:string){
+  console.log(industryID);
+}
+
   // DON'T worry about me just yet.
   // we build the form in a separate function, this helps keep the constructor clean.
   buildForm() {
@@ -79,3 +85,5 @@ writeToDataBase(IndustryName:string): Firebase.Promise<any> {
   }
 
 }
+
+

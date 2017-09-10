@@ -8,15 +8,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class IndustryComponent implements OnInit {
 
-  name: any;
+  industryId: any;
 
   constructor(
     private route: ActivatedRoute
   ) { }
 
+
   ngOnInit() {
     this.route.params.subscribe( params => {
-      this.name = params['itemId'];
+      // this.name = params['industryId'];
+      console.log('industry id is: ' + params.industryId);
+      this.industryId = params.industryId;
     })
   }
 

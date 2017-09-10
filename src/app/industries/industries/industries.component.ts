@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MdDialog } from '@angular/material';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import * as firebase from 'Firebase/app';
+import * as firebase from 'firebase/app';
 
 import { NewIndustryComponent } from '../new-industry/new-industry.component';
 import { MdSnackBar } from '@angular/material';

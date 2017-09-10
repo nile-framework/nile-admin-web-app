@@ -9,8 +9,8 @@
       </button>
 
       <md-nav-list>
-        <md-list-item *ngFor="let item of industries$ | async" (click)="showListKey(item.$key)">
-           <a mdLine>{{ item.name }}</a>
+        <md-list-item *ngFor="let item of industries$ | async" (click)="goToIndustry(item.name, item.$key)">
+           <a dLine>{{ item.name }}</a>
         </md-list-item>
       </md-nav-list>
 

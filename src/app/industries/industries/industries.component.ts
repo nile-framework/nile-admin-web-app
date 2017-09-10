@@ -7,7 +7,7 @@ import * as Firebase from 'Firebase/app';
 
 import { NewIndustryComponent } from '../new-industry/new-industry.component';
 import { MdSnackBar } from '@angular/material';
-import { ErrorComponent } from '../error/error.component';
+import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-industries',
@@ -51,7 +51,7 @@ export class IndustriesComponent implements OnInit {
          });
         }, error => {
           // open a new dialog showing the error
-          let dialogRef = this.dialog.open(ErrorComponent, {
+          let dialogRef = this.dialog.open(ErrorDialogComponent, {
             height: '200px',
             width: '300px',
             data:  error

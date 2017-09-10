@@ -1,14 +1,16 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { MdDialog } from '@angular/material';
+import { MdSnackBar } from '@angular/material';
 
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
+
 import { Subject } from 'rxjs/Subject';
 
 import { NewIndustryComponent } from '../new-industry/new-industry.component';
-import { MdSnackBar } from '@angular/material';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
 
 @Component({
@@ -90,13 +92,19 @@ export class IndustriesComponent implements OnInit {
   }
 
 
-  // DON'T worry about me just yet.
+  // NOW worry about me.
   // we build the form in a separate function, this helps keep the constructor clean.
   buildForm() {
     this.form = this._fb.group({
       searchInput: []
     });
-  }
+    // now we subscribe to any changes coming from the form.
+    // so when a user types, this function runs and emits the .next() function on the Subject
+    this.form.valueChanges.subscribe( data => {
+      console.log(data.searchInput);
+      // now we can call the next function on the Subject, as the AngularFire docs show.
+    });
+    }
 
 }
 

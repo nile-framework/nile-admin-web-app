@@ -18,6 +18,8 @@ export class IndustriesComponent implements OnInit {
 
   form: FormGroup;
   industries$: FirebaseListObservable<any>;
+  currentDateTime: string;
+  nowTime: number = Date.now();
 
   constructor(
     public dialog: MdDialog,
@@ -65,9 +67,11 @@ export class IndustriesComponent implements OnInit {
     });
   }
 
+  // the new industry is written to the data with below components
   writeToDataBase(IndustryName:string): Firebase.Promise<any> {
     return this._afDb.list(`industries`).push({
-    name: IndustryName
+    name: IndustryName,
+    timestamp: Date()
   })
   }
   // the user clicks a specific industry
@@ -75,6 +79,11 @@ export class IndustriesComponent implements OnInit {
   showListKey(industryID:string){
     console.log(industryID);
   }
+
+// getCurrentDateTime(){
+// this.currentDateTime = Date
+// return this.currentDateTime;
+// }
 
   // DON'T worry about me just yet.
   // we build the form in a separate function, this helps keep the constructor clean.

@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MdDialog } from '@angular/material';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import * as Firebase from 'Firebase/app';
+import * as firebase from 'firebase/app';
 
 import { NewIndustryComponent } from '../new-industry/new-industry.component';
 import { MdSnackBar } from '@angular/material';
@@ -19,7 +19,7 @@ export class IndustriesComponent implements OnInit {
 
   form: FormGroup;
   industries$: FirebaseListObservable<any>;
-
+  
   constructor(
     public dialog: MdDialog,
     public snackBar: MdSnackBar,
@@ -68,14 +68,14 @@ export class IndustriesComponent implements OnInit {
     });
   }
 
-
-  writeToDataBase(IndustryName: string): Firebase.Promise<any> {
+  // the new industry is written to the data with below components
+  writeToDataBase(IndustryName:string): firebase.Promise<any> {
     return this._afDb.list(`industries`).push({
-    name: IndustryName
-  });
+    name: IndustryName,
+    creationTimeStamp: firebase.database.ServerValue.TIMESTAMP
+    })
   }
-
-
+  
   // the user clicks a specific industry
   // TODO: navigate to the IndustryComponent with the selected industryId
   goToIndustry(industryName: any, industryId: string){

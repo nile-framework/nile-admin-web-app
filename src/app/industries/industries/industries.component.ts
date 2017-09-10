@@ -69,9 +69,9 @@ export class IndustriesComponent implements OnInit {
   writeToDataBase(IndustryName:string): Firebase.Promise<any> {
     return this._afDb.list(`industries`).push({
     name: IndustryName,
-    timestamp: Date()
   })
   }
+  
   // the user clicks a specific industry
   // TODO: navigate to the IndustryComponent with the selected industryId
   showListKey(industryID:string){

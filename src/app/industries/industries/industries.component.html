@@ -10,8 +10,7 @@
 
       <md-nav-list>
         <md-list-item *ngFor="let item of industries$ | async" (click)="showListKey(item.$key)">
-           <a mdLine>{{ item.name }}</a>
-           <b mdLine>{{ item.timestamp }}</b>
+           <a mdLine>{{ item.name}} </a>
         </md-list-item>
       </md-nav-list>
 

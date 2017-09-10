@@ -6,7 +6,6 @@ import { SharedModule } from '../shared/shared.module';
 import { IndustriesRoutingModule } from './industries-routing.module';
 import { NewIndustryComponent } from './new-industry/new-industry.component';
 import { IndustriesComponent } from './industries/industries.component';
-import { ErrorComponent } from './error/error.component';
 import { IndustryComponent } from './industry/industry.component';
 
 @NgModule({
@@ -18,12 +17,10 @@ import { IndustryComponent } from './industry/industry.component';
   declarations: [
     NewIndustryComponent,
     IndustriesComponent,
-    ErrorComponent,
     IndustryComponent
   ],
   entryComponents: [
-    NewIndustryComponent,
-    ErrorComponent
+    NewIndustryComponent
   ]
 })
 export class IndustriesModule { }

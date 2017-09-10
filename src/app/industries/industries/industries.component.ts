@@ -4,7 +4,7 @@ import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as Firebase from 'Firebase/app';
-import { Subject } from '@angular/Common'
+import { Subject } from 'rxjs/Subject';
 
 import { NewIndustryComponent } from '../new-industry/new-industry.component';
 import { MdSnackBar } from '@angular/material';
@@ -19,6 +19,7 @@ export class IndustriesComponent implements OnInit {
 
   form: FormGroup;
   industries$: FirebaseListObservable<any>;
+  sortSubject: FirebaseList
 
   constructor(
     public dialog: MdDialog,

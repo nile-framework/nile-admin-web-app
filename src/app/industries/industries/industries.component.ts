@@ -83,9 +83,9 @@ export class IndustriesComponent implements OnInit {
   
   // the user clicks a specific industry
   // TODO: navigate to the IndustryComponent with the selected industryId
-  goToIndustry(industryName: any, industryId: string){
-    console.log(industryName + industryId);
-
+  goToIndustry(industryId: string){
+    console.log( industryId);
+    // navigate to the specific industry page.
     this._router.navigate([`${industryId}`], {relativeTo: this._route});
   }
 
@@ -99,5 +99,7 @@ export class IndustriesComponent implements OnInit {
   }
 
 }
+
+
 
 

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 
 import { MdMenuModule, MdCheckboxModule, MdListModule, MdSelectModule, MdButtonToggleModule, 
   MdGridListModule, MdInputModule, MdTabsModule, MdProgressSpinnerModule, 

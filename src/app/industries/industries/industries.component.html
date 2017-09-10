@@ -9,16 +9,16 @@
       </button>
 
       <div>
-        <md-select placeholder= "Sort by:">
+        <!-- <md-select placeholder= "Sort by:">
           <md-option (click)="filterby('name')">Name</md-option>
-        </md-select>
+        </md-select> -->
         <md-form-field class="example-full-width">
             <input mdInput placeholder="Industry Name" value="">
           </md-form-field>
       </div>
       
     <md-nav-list>
-        <md-list-item *ngFor="let item of industries$ | async" (click)="showListKey(item.$key)">
+        <md-list-item *ngFor="let item of industries$ | async" (click)="goToIndustry(item.$key)">
            <a mdLine>{{ item.name }}</a>
         </md-list-item>
       </md-nav-list>

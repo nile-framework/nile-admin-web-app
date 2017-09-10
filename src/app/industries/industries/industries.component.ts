@@ -3,14 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MdDialog } from '@angular/material';
 
-<<<<<<< HEAD
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import * as Firebase from 'Firebase/app';
-import { Subject } from 'rxjs/Subject';
-=======
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
->>>>>>> ebed0bd7822ba369725a4cd15f78afae6637d0c7
+import { Subject } from 'rxjs/Subject';
 
 import { NewIndustryComponent } from '../new-industry/new-industry.component';
 import { MdSnackBar } from '@angular/material';
@@ -38,10 +33,9 @@ export class IndustriesComponent implements OnInit {
     this.buildForm();
     this.industries$ = this._afDb.list(`industries`, {
       query: {
-        equalTo: this.sortSubject
+        orderByChild: 'name'
       }
     });
-    this.sortSubject = new Subject();
   }
 
   // this is a lifecycle function, it runs when the component has been initialized.

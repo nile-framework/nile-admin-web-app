@@ -1,10 +1,16 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MdDialog } from '@angular/material';
 
+<<<<<<< HEAD
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import * as Firebase from 'Firebase/app';
 import { Subject } from 'rxjs/Subject';
+=======
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
+>>>>>>> ebed0bd7822ba369725a4cd15f78afae6637d0c7
 
 import { NewIndustryComponent } from '../new-industry/new-industry.component';
 import { MdSnackBar } from '@angular/material';
@@ -25,7 +31,9 @@ export class IndustriesComponent implements OnInit {
     public dialog: MdDialog,
     public snackBar: MdSnackBar,
     private _fb: FormBuilder,
-    private _afDb: AngularFireDatabase    
+    private _afDb: AngularFireDatabase,
+    private _router: Router,
+    private _route: ActivatedRoute
   ) {
     this.buildForm();
     this.industries$ = this._afDb.list(`industries`, {
@@ -71,16 +79,22 @@ export class IndustriesComponent implements OnInit {
     });
   }
 
-  writeToDataBase(IndustryName:string): Firebase.Promise<any> {
+  // the new industry is written to the data with below components
+  writeToDataBase(IndustryName:string): firebase.Promise<any> {
     return this._afDb.list(`industries`).push({
-    name: IndustryName
-  })
+    name: IndustryName,
+    creationTimeStamp: firebase.database.ServerValue.TIMESTAMP
+    })
   }
+  
   // the user clicks a specific industry
   // TODO: navigate to the IndustryComponent with the selected industryId
-  showListKey(industryID:string){
-    console.log(industryID);
+  goToIndustry(industryName: any, industryId: string){
+    console.log(industryName + industryId);
+
+    this._router.navigate([`${industryId}`], {relativeTo: this._route});
   }
+
 
   // DON'T worry about me just yet.
   // we build the form in a separate function, this helps keep the constructor clean.

@@ -4,7 +4,6 @@ import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as Firebase from 'Firebase/app';
-import { Subject } from 'rxjs/Subject';
 
 import { NewIndustryComponent } from '../new-industry/new-industry.component';
 import { MdSnackBar } from '@angular/material';
@@ -19,8 +18,7 @@ export class IndustriesComponent implements OnInit {
 
   form: FormGroup;
   industries$: FirebaseListObservable<any>;
-  sortSubject: FirebaseList
-
+  
   constructor(
     public dialog: MdDialog,
     public snackBar: MdSnackBar,
@@ -29,13 +27,6 @@ export class IndustriesComponent implements OnInit {
   ) {
     this.buildForm();
     this.industries$ = this._afDb.list(`industries`);
-    this.buildForm();
-    this.industries$ = this._afDb.list(`industries`, {
-      query: {
-        equalTo: this.sortSubject
-      }
-    });
-    this.sortSubject = new Subject();
   }
 
   // this is a lifecycle function, it runs when the component has been initialized.
@@ -77,8 +68,8 @@ export class IndustriesComponent implements OnInit {
   // the new industry is written to the data with below components
   writeToDataBase(IndustryName:string): Firebase.Promise<any> {
     return this._afDb.list(`industries`).push({
-    name: IndustryName,
-  })
+    name: IndustryName
+    })
   }
   
   // the user clicks a specific industry

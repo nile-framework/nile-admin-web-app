@@ -17,7 +17,7 @@ import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.com
 export class IndustriesComponent implements OnInit {
 
   form: FormGroup;
-  industries: FirebaseListObservable<any>;
+  industries$: FirebaseListObservable<any>;
 
   constructor(
     public dialog: MdDialog,
@@ -26,7 +26,7 @@ export class IndustriesComponent implements OnInit {
     private _afDb: AngularFireDatabase    
   ) {
     this.buildForm();
-    this.industries = this._afDb.list(`industries`);
+    this.industries$ = this._afDb.list(`industries`);
   }
 
   // this is a lifecycle function, it runs when the component has been initialized.
@@ -42,8 +42,9 @@ export class IndustriesComponent implements OnInit {
     });
     // we subscribe to dialogs close event.
     dialogRef.afterClosed().subscribe( result => {
-      console.log('result from the dialog is: ' + result);
+      // console.log('result from the dialog is: ' + result);
       if (result) {
+        // there is a result to process, lets now write it to the database.
         this.writeToDataBase(result).then( snapshot => {
         // the database write was successful
         let snackBarRef = this.snackBar.open( 'Industry added to database', 'Okay', { 
@@ -56,25 +57,24 @@ export class IndustriesComponent implements OnInit {
             width: '300px',
             data:  error
           });
-        })        
-        // there is a result to process, lets now write it to the database.
-        // if the write to the database is successful, display a confirmation 'snackbar'
-        // else, open a new dialog with the error.
+        });
       } else {
         // result was false, do nothing.
+        return;
       }
     });
   }
 
-writeToDataBase(IndustryName:string): Firebase.Promise<any> {
-  return this._afDb.list(`industries`).push({
-  name: IndustryName
-})
-}
-
-showListKey(industryID:string){
-  console.log(industryID);
-}
+  writeToDataBase(IndustryName:string): Firebase.Promise<any> {
+    return this._afDb.list(`industries`).push({
+    name: IndustryName
+  })
+  }
+  // the user clicks a specific industry
+  // TODO: navigate to the IndustryComponent with the selected industryId
+  showListKey(industryID:string){
+    console.log(industryID);
+  }
 
   // DON'T worry about me just yet.
   // we build the form in a separate function, this helps keep the constructor clean.

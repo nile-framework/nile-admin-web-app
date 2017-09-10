@@ -7,6 +7,7 @@ import { IndustriesRoutingModule } from './industries-routing.module';
 import { NewIndustryComponent } from './new-industry/new-industry.component';
 import { IndustriesComponent } from './industries/industries.component';
 import { IndustryComponent } from './industry/industry.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { IndustryComponent } from './industry/industry.component';
   declarations: [
     NewIndustryComponent,
     IndustriesComponent,
-    IndustryComponent
+    IndustryComponent,
+    HomeComponent
   ],
   entryComponents: [
     NewIndustryComponent

@@ -27,32 +27,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class IndustriesRoutingModule { }
-
-
-
-// const crisisCenterRoutes: Routes = [
-//   {
-//     path: '',
-//     component: CrisisCenterComponent,
-//     children: [
-//       {
-//         path: '',
-//         component: CrisisListComponent,
-//         children: [
-//           {
-//             path: ':id',
-//             component: CrisisDetailComponent,
-//             canDeactivate: [CanDeactivateGuard],
-//             resolve: {
-//               crisis: CrisisDetailResolver
-//             }
-//           },
-//           {
-//             path: '',
-//             component: CrisisCenterHomeComponent
-//           }
-//         ]
-//       }
-//     ]
-//   }
-// ];

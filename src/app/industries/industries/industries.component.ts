@@ -9,6 +9,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import * as firebase from 'firebase/app';
 
 import { Subject } from 'rxjs/Subject';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 import { NewIndustryComponent } from '../new-industry/new-industry.component';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
@@ -22,7 +23,7 @@ export class IndustriesComponent implements OnInit {
 
   form: FormGroup;
   industries$: FirebaseListObservable<any>;
-  sortSubject: Subject<any>;
+  sortSubject: BehaviorSubject<any>;
 
   constructor(
     public dialog: MdDialog,
@@ -33,11 +34,7 @@ export class IndustriesComponent implements OnInit {
     private _route: ActivatedRoute
   ) {
     this.buildForm();
-    this.industries$ = this._afDb.list(`industries`, {
-      query: {
-        orderByChild: 'name'
-      }
-    });
+
   }
 
   // this is a lifecycle function, it runs when the component has been initialized.
@@ -95,6 +92,7 @@ export class IndustriesComponent implements OnInit {
   // NOW worry about me.
   // we build the form in a separate function, this helps keep the constructor clean.
   buildForm() {
+
     this.form = this._fb.group({
       searchInput: []
     });
@@ -103,6 +101,14 @@ export class IndustriesComponent implements OnInit {
     this.form.valueChanges.subscribe( data => {
       console.log(data.searchInput);
       // now we can call the next function on the Subject, as the AngularFire docs show.
+      this.sortSubject.next(data.searchInputs);
+      console.log(this.sortSubject);
+    });
+    this.industries$ = this._afDb.list(`industries`, {
+      query: {
+        orderByChild: 'name',
+        startAt: this.sortSubject.next
+      }
     });
     }
 

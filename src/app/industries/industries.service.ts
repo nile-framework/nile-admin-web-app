@@ -29,7 +29,7 @@ export class IndustriesService {
     // });
   } 
 
-
+  // https://angularfirebase.com/lessons/autocomplete-search-with-angular4-and-firebase/
   getIndustries(start, end): FirebaseListObservable<any> {
     console.log('we ran again.');
     return this._afDb.list('/industries', {

@@ -8,11 +8,28 @@
           Add Industry
       </button>
 
-      <md-nav-list>
-        <md-list-item *ngFor="let item of industries$ | async" (click)="goToIndustry(item.name, item.$key)">
-           <a dLine>{{ item.name }}</a>
+      <div>
+        <!-- <md-select placeholder= "Sort by:">
+          <md-option (click)="filterby('name')">Name</md-option>
+        </md-select> -->
+        <form [formGroup]="form" novalidate>
+          <md-form-field class="example-full-width">
+            <input (keydown)="search($event)" formControlName="searchValue" mdInput placeholder="Search industries">
+          </md-form-field>
+        </form>
+      
+      </div>
+      
+    <md-nav-list>
+        <md-list-item *ngFor="let item of industries" (click)="goToIndustry(item.$key)">
+           <a mdLine>{{ item?.name }}</a>
         </md-list-item>
       </md-nav-list>
+      <!-- if there are no industries -->
+      <div *ngIf="industries?.length < 1">
+        <hr>
+        <p>There are no industries yet! Click <strong>Add Industry</strong> to create the first industry.</p>
+      </div>
 
     </div>
   </div>

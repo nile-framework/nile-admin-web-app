@@ -1,14 +1,19 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MdDialog } from '@angular/material';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { MdDialog } from '@angular/material';
+import { MdSnackBar } from '@angular/material';
+
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 
+import { Subject } from 'rxjs/Subject';
+// import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
 import { NewIndustryComponent } from '../new-industry/new-industry.component';
-import { MdSnackBar } from '@angular/material';
 import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.component';
+import { IndustriesService } from '../industries.service';
 
 @Component({
   selector: 'app-industries',
@@ -18,24 +23,44 @@ import { ErrorDialogComponent } from '../../shared/error-dialog/error-dialog.com
 export class IndustriesComponent implements OnInit {
 
   form: FormGroup;
-  industries$: FirebaseListObservable<any>;
-  
+
+  industries;
+  startAt = new Subject();
+  endAt = new Subject();
+
   constructor(
     public dialog: MdDialog,
     public snackBar: MdSnackBar,
-    private _fb: FormBuilder,
     private _afDb: AngularFireDatabase,
     private _router: Router,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    public industriesSvc: IndustriesService,
+    private _fb: FormBuilder
   ) {
     this.buildForm();
-    this.industries$ = this._afDb.list(`industries`);
+    
   }
+
 
   // this is a lifecycle function, it runs when the component has been initialized.
   ngOnInit() {
+    this.industriesSvc.getIndustries(this.startAt, this.endAt).subscribe( industries => {
+      this.industries = industries;
+    });
+    this.initialQuery();
   }
 
+
+
+
+
+
+  buildForm()
+  {
+    this.form = this._fb.group({
+      searchValue: ['']
+    })
+  }
 
   // when the user clicks 'Add Industry' this function runs.
   addIndustryDialog(): void {
@@ -68,31 +93,36 @@ export class IndustriesComponent implements OnInit {
     });
   }
 
+
   // the new industry is written to the data with below components
-  writeToDataBase(IndustryName:string): firebase.Promise<any> {
+  writeToDataBase(industryName: string): firebase.Promise<any> {
     return this._afDb.list(`industries`).push({
-    name: IndustryName,
+    name: industryName,
     creationTimeStamp: firebase.database.ServerValue.TIMESTAMP
     })
   }
   
+
   // the user clicks a specific industry
   // TODO: navigate to the IndustryComponent with the selected industryId
-  goToIndustry(industryName: any, industryId: string){
-    console.log(industryName + industryId);
-
+  goToIndustry(industryId: string){
+    console.log( industryId);
+    // navigate to the specific industry page.
     this._router.navigate([`${industryId}`], {relativeTo: this._route});
   }
 
+  search($event) {
+    let searchValue = $event.target.value
+    this.startAt.next(searchValue);
+    this.endAt.next(searchValue + '\uf8ff');
+  }
 
-  // DON'T worry about me just yet.
-  // we build the form in a separate function, this helps keep the constructor clean.
-  buildForm() {
-    this.form = this._fb.group({
-      searchInput: []
-    });
+  initialQuery() {
+    this.startAt.next('');
+    this.endAt.next(''+'\uf8ff');
   }
 
 }
+
 
 

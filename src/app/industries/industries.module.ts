@@ -9,6 +9,8 @@ import { IndustriesComponent } from './industries/industries.component';
 import { IndustryComponent } from './industry/industry.component';
 import { HomeComponent } from './home/home.component';
 
+import { IndustriesService } from './industries.service';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -23,6 +25,9 @@ import { HomeComponent } from './home/home.component';
   ],
   entryComponents: [
     NewIndustryComponent
+  ],
+  providers: [
+    IndustriesService
   ]
 })
 export class IndustriesModule { }

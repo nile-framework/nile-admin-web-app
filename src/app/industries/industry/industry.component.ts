@@ -18,6 +18,7 @@ export class IndustryComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe( params => {
       // this.name = params['industryId'];
+      console.dir(params);
       console.log('industry id is: ' + params.industryId);
       this.industryId = params.industryId;
     })

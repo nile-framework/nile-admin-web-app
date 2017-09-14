@@ -19,8 +19,8 @@ export class AppComponent {
     const authListener = this._afAuth.authState.subscribe( user => {
       if (user) {
         // navigate to the home screen.
-        // this._router.navigate(['home']);
-        this._router.navigate(['industries']);
+        this._router.navigate(['home']);
+        // this._router.navigate(['industries']);
         this.showNavMenu = true;
       } else {
         // navigate to the landing page.

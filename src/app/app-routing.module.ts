@@ -5,15 +5,14 @@ import { LoginStatusGuard } from './login-status.guard'; // <-- check authentica
 
  
 const appRoutes: Routes = [
-  // { path: '', loadChildren: 'app/home/home.module#HomeModule'},
-  { path: '', loadChildren: 'app/home/home.module#HomeModule', canActivate:[LoginStatusGuard]},
-  { path: '', loadChildren:'app/landing-page/landing-page.module#LandingPageModule'},
   { path: 'home', loadChildren: 'app/home/home.module#HomeModule', canActivate:[LoginStatusGuard] },
-  { path: 'vendors', loadChildren: 'app/vendors/vendors.module#VendorsModule'},
-  { path: 'cities', loadChildren: 'app/city/city.module#CityModule'},
-  { path: 'industries', loadChildren: 'app/industries/industries.module#IndustriesModule'},
-  { path: 'landing', loadChildren: 'app/landing-page/landing-page.module#LandingPageModule'},
-  { path: 'users', loadChildren: 'app/users/users.module#UsersPageModule'},
+  { path: 'vendors', loadChildren: 'app/vendors/vendors.module#VendorsModule', canActivate:[LoginStatusGuard]},
+  { path: 'cities', loadChildren: 'app/city/city.module#CityModule', canActivate:[LoginStatusGuard]},
+  { path: 'industries', loadChildren: 'app/industries/industries.module#IndustriesModule', canActivate:[LoginStatusGuard]},
+  { path: 'landing', loadChildren: 'app/landing-page/landing-page.module#LandingPageModule', canActivate:[LoginStatusGuard]},
+  // { path: 'users', loadChildren: 'app/users/users.module#UsersPageModule'},
+  { path: '', redirectTo:'/home' , pathMatch:'full', canActivate:[LoginStatusGuard]},
+  { path: '', redirectTo:'/landing', pathMatch:'full'},
   { path: '**',  redirectTo:'/error', pathMatch: 'full' }
 ];
  

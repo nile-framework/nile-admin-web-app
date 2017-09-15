@@ -13,6 +13,7 @@ const appRoutes: Routes = [
   { path: 'cities', loadChildren: 'app/city/city.module#CityModule'},
   { path: 'industries', loadChildren: 'app/industries/industries.module#IndustriesModule'},
   { path: 'landing', loadChildren: 'app/landing-page/landing-page.module#LandingPageModule'},
+  { path: 'users', loadChildren: 'app/users/users.module#UsersPageModule'},
   { path: '**',  redirectTo:'/error', pathMatch: 'full' }
 ];
  

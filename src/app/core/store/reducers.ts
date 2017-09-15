@@ -29,19 +29,19 @@ export interface EchoesState {
     // AppLayoutActions
   ];
 
+
+//   export function getPlayerSearch$ (state$: Observable<EchoesState>): Observable<PlayerSearch> {
+//     return state$.select(state => state.search);
+//   };
   
-  export function getPlayerSearch$ (state$: Observable<EchoesState>): Observable<PlayerSearch> {
-    return state$.select(state => state.search);
-  };
+//   export function getPlayerSearchResults$ (state$: Observable<EchoesState>): Observable<any[]> {
+//     return state$.select(state => state.search.results);
+//   };
   
-  export function getPlayerSearchResults$ (state$: Observable<EchoesState>): Observable<any[]> {
-    return state$.select(state => state.search.results);
-  };
+//   export function getAppLayout$ ($state: Observable<EchoesState>): Observable<IAppSettings> {
+//     return $state.select(state => state.appLayout);
+//   };
   
-  export function getAppLayout$ ($state: Observable<EchoesState>): Observable<IAppSettings> {
-    return $state.select(state => state.appLayout);
-  };
-  
-  export function getNowPlaylist$ ($state: Observable<EchoesState>): Observable<NowPlaylistInterface> {
-    return $state.select(state => state.nowPlaylist);
-  };
+//   export function getNowPlaylist$ ($state: Observable<EchoesState>): Observable<NowPlaylistInterface> {
+//     return $state.select(state => state.nowPlaylist);
+//   };

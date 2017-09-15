@@ -1,0 +1,101 @@
+@import '../core/global.scss';
+
+@media (min-width: 320px) {
+	$navbar-new-height: 1rem;
+
+	.navbar {
+		background-image: none;
+		background-color: darken($navbar-default-bg, 2%);
+		transition: transform, margin-left .3s ease-out;
+
+		&.navbar-fixed-top {
+			padding: 0;
+			z-index: 1020;
+
+			&.fullscreen {
+				transform: translatey(-60px);
+			}
+		}
+
+		.navbar-brand {
+			margin: 0;
+			text-transform: uppercase;
+			// font-size: 1em;
+			position: relative;
+			padding: 0 3px;
+			display: inline-block;
+			// line-height: 40px;
+		}
+		.sidebar-toggle {
+			padding: 1rem 1.5rem;
+			font-size: 2rem;
+		}
+
+		.navbar-header {
+			width: auto;
+			margin-right: 7px;
+			line-height: $navbar-new-height;
+		}
+
+		.navbar-collapse {
+			clear: both;
+		}
+		.container-fluid {
+			padding: 0;
+		}
+	}
+	.navbar .navbar-collapse {
+		border: none;
+	}
+	.nav-header-fluid {
+		position: relative;
+	}
+
+	.navbar-nav > li > .dropdown-toggle {
+		padding: 10px 15px;
+		color: $navbar-default-link-color;
+	}
+
+	&.navbar-transparent {
+		background-color: transparent;
+		color: $inverse;
+	}
+
+	.btn-group.open .dropdown-toggle {
+		background-color: rgba(0,0,0, .1);
+	}
+}
+
+@media (min-width: 768px) {
+	.navbar {
+
+		.container {
+      // @extend container-fluid;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+			padding: 0;
+		}
+
+		.navbar-collapse {
+			clear: none;
+		}
+	}
+	.navbar-fixed-top {
+		box-shadow: 0 1px 7px rgba(0,0,0,0.5);
+		border-width: 0;
+	}
+}
+@media (min-width: 1024px) {
+	.navbar .navbar-brand {
+		font-size: 1.4em;
+	}
+	
+}
+
+@media (min-width: 1280px) {
+	.navbar .navbar-brand {
+		padding-left: 5px;
+	}
+}

@@ -17,6 +17,9 @@ import { AppRoutingModule } from './app-routing.module';
 // guards
 import { LoginStatusGuard } from './login-status.guard';
 
+// modules
+import { CoreModule } from './core/core.module';
+
 // Service providers
 import { AuthService } from './auth.service';
 import { CityService } from './city.service';
@@ -37,6 +40,7 @@ import { CityService } from './city.service';
       apiKey: 'AIzaSyCY8s3f6TRkkeEdygcQxkKAMeoeiYcq-sM',
       libraries: ["places"]
     }),
+    CoreModule,
     AppRoutingModule
   ],
   providers: [

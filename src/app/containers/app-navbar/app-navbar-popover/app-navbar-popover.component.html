@@ -1,0 +1,38 @@
+
+  <button class="btn btn-navbar btn-link ux-maker btn-toggle"
+    (click)="toggleMenu()">
+    <i class="fa fa-ellipsis-v"></i>
+    <!-- <i *ngIf="appVersion.isNewAvailable" class="pulse update-indicator fa fa-dot-circle-o text-success"></i> -->
+  </button>
+
+  
+
+
+
+
+
+<div class="panel panel-default menu-dropdown"
+  [class.slideInDown]="!hide">
+  <div class="menu-backdrop" *ngIf="!hide" (click)="hideMenu()"></div>
+  <div class="list-group">
+    <a class="list-group-item" href="https://github.com/nile-framework/nile-admin-web-app" target="_blank">
+      <i class="fa fa-github"></i> Source Code @Github
+    </a>
+    <!-- <a class="list-group-item" *ngIf="!hide" href="https://travis-ci.org/orizens/echoes-player" target="_blank">
+      <img src="https://travis-ci.org/orizens/echoes-player.svg?branch=master">
+    </a> -->
+    <div class="list-group-item" target="_blank">
+      v.<a href="https://github.com/orizens/echoes-player/blob/master/CHANGELOG.md" target="_blank">
+        {{ appVersion.semver }} 
+        </a>
+    </div>
+    <a class="list-group-item" href="www.niledeliveryapp.com" target="_blank">
+      made with <i class="fa fa-heart text-danger"></i> By <i class="fa fa-fire-extinguisher text-danger"></i>
+    </a>
+    <button class="list-group-item"
+      *ngIf="signedIn"
+      (click)="handleSignOut()">
+      <i class="fa fa-sign-out"></i> Sign Out
+    </button>
+  </div>
+</div>

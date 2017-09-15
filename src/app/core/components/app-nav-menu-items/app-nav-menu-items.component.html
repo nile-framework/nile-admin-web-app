@@ -1,0 +1,29 @@
+<ul class="nav nav-list nicer-ux library-nav"
+  [class.closed]="closed">
+  <li *ngFor="let route of routes"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }">
+
+    <a routerLink="{{ route.link }}">
+      <i class="{{ route.icon }}"></i>
+      <span class="text">{{ route.label }}</span>
+    </a>
+  </li>
+</ul>
+
+
+
+
+
+<!-- <ul class="nav nav-list nicer-ux library-nav navigator"
+[class.closed]="closed">
+<li *ngFor="let route of routes"
+  routerLinkActive="active" 
+  [routerLinkActiveOptions]="{ exact: true }"
+  >
+  <a routerLink="{{ route.link }}">
+    <i class="{{ route.icon }}"></i>
+    <span class="text">{{ route.label }}</span>
+  </a>
+</li>
+</ul> -->

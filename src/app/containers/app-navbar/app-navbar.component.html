@@ -1,0 +1,25 @@
+<nav class="row navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <h2 class="navbar-brand">
+      <button class="btn btn-navbar text-primary btn-link ux-maker pull-left sidebar-toggle"
+        (click)="toggleSidebar()">
+        <i class="fa fa-bars"></i>
+      </button>
+    </h2>
+    <div class="navbar__content pull-left">
+      <ng-content></ng-content>
+    </div>
+    <section class="pull-right navbar-text navbar-actions">
+      <app-navbar-user 
+        [signedIn]="isSignIn()" 
+        [userImageUrl]="(user$ | async).profile.imageUrl"
+        (signIn)="signInUser()"
+        ></app-navbar-user>
+      <app-navbar-menu 
+        [appVersion]="appVersion$ | async"
+        [signedIn]="isSignIn()"
+        (signOut)="signOutUser()"
+      ></app-navbar-menu>
+    </section>
+  </div>
+</nav>

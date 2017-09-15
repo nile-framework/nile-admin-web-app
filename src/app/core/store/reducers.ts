@@ -29,6 +29,7 @@ export interface EchoesState {
     // AppLayoutActions
   ];
 
+  
   export function getPlayerSearch$ (state$: Observable<EchoesState>): Observable<PlayerSearch> {
     return state$.select(state => state.search);
   };

@@ -11,7 +11,7 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       {
-        path: ':industryName',
+        path: 'name:industryName',
         component: IndustriesComponent
       },
       {

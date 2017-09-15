@@ -22,7 +22,7 @@
       
     <md-nav-list>
         <md-list-item *ngFor="let item of industries" (click)="goToIndustry(item.$key)">
-           <a mdLine>{{ item?.name }}</a>
+           <a [routerLink]="['name', item.$key]" mdLine>{{ item?.name }}</a>
         </md-list-item>
       </md-nav-list>
       <!-- if there are no industries -->

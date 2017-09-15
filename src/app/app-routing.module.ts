@@ -1,5 +1,5 @@
 import { NgModule }              from '@angular/core';
-import { LoadChildren, RouterModule, Routes } from '@angular/router';
+import { LoadChildren, RouterModule, Routes, ExtraOptions } from '@angular/router';
 
 import { LoginStatusGuard } from './login-status.guard'; // <-- check authentication status, returns boolean
 
@@ -15,13 +15,18 @@ const appRoutes: Routes = [
   { path: '', redirectTo:'/landing', pathMatch:'full'},
   { path: '**',  redirectTo:'/error', pathMatch: 'full' }
 ];
+
+const config: ExtraOptions = {
+  useHash: false,
+  // preloadingStrategy: PreloadAllModules
+  enableTracing: true // <-- debugging purposes only
+};
  
 @NgModule({
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      // { enableTracing: true } // <-- debugging purposes only
-      
+      config
     )
   ],
   exports: [

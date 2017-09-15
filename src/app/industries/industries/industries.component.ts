@@ -108,7 +108,7 @@ export class IndustriesComponent implements OnInit {
   goToIndustry(industryId: string){
     console.log( industryId);
     // navigate to the specific industry page.
-    this._router.navigate([`${industryId}`], {relativeTo: this._route});
+    // this._router.navigate([`${industryId}`], {relativeTo: this._route});
   }
 
   search($event) {
